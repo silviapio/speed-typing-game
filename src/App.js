@@ -1,12 +1,15 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import './App.css';
 
 function App() {
   const STARTING_TIME = 5;
+  const textareaRef = useRef(null);
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [textInput, setTextInput] = useState("");
   const [wordCount, setWordCount] = useState("");
   const [secondsLeft, setSecondsLeft] = useState(STARTING_TIME);
+
+  console.log(textareaRef.current);
 
   const handleInput = event => {
     setTextInput(event.target.value);
@@ -16,6 +19,8 @@ function App() {
     setIsGameRunning(true);
     setSecondsLeft(STARTING_TIME);
     setTextInput("");
+    textareaRef.current.disabled = false; // necessary to allow focus
+    textareaRef.current.focus();
   }
 
   const getWordsCount = str => {
@@ -49,6 +54,7 @@ function App() {
             value={textInput} 
             onChange={handleInput}
             disabled={!isGameRunning}
+            ref={textareaRef}
           />
           <h4>Time remaining: {secondsLeft}</h4>
           <button 
