@@ -1,13 +1,14 @@
 import {useEffect, useState, useRef} from "react";
+import StartingTimeBox from "./components/StartingTimeBox";
 import './App.css';
 
 function App() {
-  const STARTING_TIME = 5;
   const textareaRef = useRef(null);
+  const [startingTime, setStartingTime] = useState(5)
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [textInput, setTextInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(STARTING_TIME);
+  const [secondsLeft, setSecondsLeft] = useState(startingTime);
 
   const handleInput = event => {
     setTextInput(event.target.value);
@@ -15,7 +16,7 @@ function App() {
 
   const startGame = () => {
     setIsGameRunning(true);
-    setSecondsLeft(STARTING_TIME);
+    setSecondsLeft(startingTime);
     setTextInput("");
     textareaRef.current.disabled = false; // necessary to allow focus
     textareaRef.current.focus();
@@ -45,9 +46,21 @@ function App() {
     }
   }, [secondsLeft, isGameRunning]);
 
+  const handleEditStartingTime = (seconds) => {
+    setStartingTime(seconds);
+  }
+
+  useEffect(() => setSecondsLeft(startingTime), [startingTime])
+
   return (
       <div>
           <h1>How fast do you type?</h1>
+          <div className="seconds-allowed-container">
+            <p>Seconds allowed: </p>
+            <StartingTimeBox startingTime={startingTime} handleSubmitTime={handleEditStartingTime} changesForbidden={isGameRunning}/>
+          </div>
+           
+                
           <textarea 
             value={textInput} 
             onChange={handleInput}
@@ -55,13 +68,14 @@ function App() {
             ref={textareaRef}
           />
           <button 
+            className="button--start"
             onClick={startGame} 
             disabled={isGameRunning}
           >
             Start
           </button>
           <h2>Word count: {wordCount}</h2>
-          <h2>Time remaining: {secondsLeft}</h2>
+          <h2>Seconds remaining: {secondsLeft}</h2>
       </div>
   );
 }
