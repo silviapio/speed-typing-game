@@ -1,4 +1,4 @@
-button {
+.button--start {
   font-family: 'Ubuntu Mono', monospace;
   font-size: 1.2rem;
   display: block;
@@ -34,3 +34,31 @@ textarea:disabled {
   background-color: var(--grey);
 }
 
+.seconds-allowed__button {
+  background-color: var(--white);
+  padding: 0;
+  height: 1.7rem;
+}
+
+.starting-time-box {
+  margin: 0 5px;
+  color: var(--white);
+}
+
+.seconds-allowed-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seconds-allowed-container > * {
+  font-size: 1.4rem;
+  margin: 5px 2.5px;
+}
+
+.seconds-allowed__input {
+  max-width: 3rem;
+  font-size: 1.3rem;
+  font-family: 'Ubuntu Mono', monospace;
+  background-color: var(--white);
+}
