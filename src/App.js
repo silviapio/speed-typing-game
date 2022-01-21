@@ -6,10 +6,8 @@ function App() {
   const textareaRef = useRef(null);
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [textInput, setTextInput] = useState("");
-  const [wordCount, setWordCount] = useState("");
+  const [wordCount, setWordCount] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(STARTING_TIME);
-
-  console.log(textareaRef.current);
 
   const handleInput = event => {
     setTextInput(event.target.value);
@@ -56,16 +54,16 @@ function App() {
             disabled={!isGameRunning}
             ref={textareaRef}
           />
-          <h4>Time remaining: {secondsLeft}</h4>
           <button 
             onClick={startGame} 
             disabled={isGameRunning}
           >
             Start
           </button>
-          <h1>Word count: {wordCount}</h1>
+          <h2>Word count: {wordCount}</h2>
+          <h2>Time remaining: {secondsLeft}</h2>
       </div>
-  )
+  );
 }
 
-export default App
+export default App;

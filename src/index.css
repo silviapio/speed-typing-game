@@ -1,16 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+html {
+  --green: #22C55E;
+  --dark: #0F172A;
+  --grey: #ABB8C9;
+  --white: #FAFAFA;
+}
 
 html, body {
-  background: black;
-  color: #00b800;
+  background: var(--dark);
+  color: var(--green);
   margin:0;
   padding: 0;
   padding-top: 10px;
-  font-family: 'Oxygen Mono', monospace;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 400;
   text-align: center;
 }
-
-body {
-  font-weight: 400;
-}
-
