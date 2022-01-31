@@ -62,3 +62,7 @@ textarea:disabled {
   font-family: 'Ubuntu Mono', monospace;
   background-color: var(--white);
 }
+
+.seconds-allowed__input--wrong {
+  color: red;
+}

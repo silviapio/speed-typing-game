@@ -1,16 +1,35 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {HiPencil, HiXCircle, HiCheckCircle} from "react-icons/hi";
 
 function StartingTimeBox(props) {
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [isInactive, setIsInactive] = useState(true);
     const [editedStartingTime, setEditedStartingTime] = useState(props.startingTime);
+    const inputRef = useRef(null);
 
     const handleEditStartingTime = (e) => {
         setEditedStartingTime(e.target.value);
     }
 
-    const handleSubmit = () => {
-        setIsDisabled(true);
+    const isSubmittedTimeOk = () => {
+        const time = parseFloat(editedStartingTime);
+        return ((time % 1 === 0) && (time > 0));
+    }
+
+    const handleWrongInput = async () => {
+        const input = inputRef.current;
+        input.classList.add("seconds-allowed__input--wrong");
+        setTimeout(() => {
+            input.classList.remove("seconds-allowed__input--wrong");
+            setEditedStartingTime(props.startingTime);
+            }, 700);
+    }
+
+    const handleSubmit = async () => {
+        if (!isSubmittedTimeOk()) {
+            handleWrongInput();
+            return;
+        }
+        setIsInactive(true);        
         props.handleSubmitTime(editedStartingTime);
     }
 
@@ -18,27 +37,38 @@ function StartingTimeBox(props) {
         if (props.changesForbidden) {
             return;
         }
-        setIsDisabled(prevState => !prevState);
+        setIsInactive(prevState => !prevState);
     }
 
     useEffect(() => {
         if (props.changesForbidden) {
-            setIsDisabled(true);
+            setIsInactive(true);
             setEditedStartingTime(props.startingTime);
         }
     }, [props.changesForbidden])
 
     return (
         <>
-            {isDisabled || props.changesForbidden ? 
+            {isInactive || props.changesForbidden ? 
                 <p>{props.startingTime}</p> :
                 <>
-                <input className="seconds-allowed__input" type="text" value={editedStartingTime} onChange={handleEditStartingTime} onSubmit={handleSubmit}/>
+                <input 
+                    className="seconds-allowed__input" 
+                    type="number" 
+                    ref={inputRef}
+                    value={editedStartingTime} 
+                    onChange={handleEditStartingTime} 
+                    onSubmit={handleSubmit}
+                />
                 <button className="seconds-allowed__button button--submit" onClick={handleSubmit}><HiCheckCircle /></button>
                 </>
             }
-            <button className="seconds-allowed__button button--edit" onClick={handleButtonClick}>
-                {isDisabled ?
+            <button 
+                className="seconds-allowed__button button--edit" 
+                disabled={props.changesForbidden ? true : ""}
+                onClick={handleButtonClick}
+            >
+                {isInactive ?
                     <HiPencil /> :
                     <HiXCircle />
                 }
