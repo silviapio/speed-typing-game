@@ -29,14 +29,22 @@ function App() {
     return Math.floor(numOfWords * multiplier);
   }
 
-  const getWordCount = str => {
+  const getValidWordCount = async str => {
     const wordsArray = str.split(" ");
-    return wordsArray.filter(item => item !== "").length;
+    const validWordsCount = [];
+    for (const word of wordsArray) {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+      if (res.ok) {
+        validWordsCount.push(word);
+      }
+    }
+    return validWordsCount.length;
   }
 
-  const endGame = () => {
+  const endGame = async () => {
     setIsGameRunning(false);
-    setWordCount(getWordCount(textInput));
+    const validWordCount = await getValidWordCount(textInput);
+    setWordCount(validWordCount);
   }
 
   useEffect(() => {
@@ -106,7 +114,7 @@ function App() {
             </button>
           </div>
           <h2>Seconds remaining: {secondsLeft}</h2>
-          <h2 className="message--words">Words typed: {wordCount}</h2>
+          <h2 className="message--words">Valid words typed: {wordCount}</h2>
           <h3 className="message--words">Words per minute: {getWordsPerMinute(wordCount, startingTime)}</h3>
           {bestScore && <h3 className="message--words--best-score">^^^ Best score: {bestScore} w/min ^^^</h3>}
           
