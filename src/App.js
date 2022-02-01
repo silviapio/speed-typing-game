@@ -1,14 +1,16 @@
 import {useEffect, useState, useRef} from "react";
 import StartingTimeBox from "./components/StartingTimeBox";
+import {HiRefresh} from "react-icons/hi";
 import './App.css';
 
 function App() {
   const textareaRef = useRef(null);
-  const [startingTime, setStartingTime] = useState(5)
+  const [startingTime, setStartingTime] = useState(5);
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [textInput, setTextInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(startingTime);
+  const [bestScore, setBestScore] = useState( JSON.parse(localStorage.getItem("bestScore")) || "" );
 
   const handleInput = event => {
     setTextInput(event.target.value);
@@ -22,14 +24,19 @@ function App() {
     textareaRef.current.focus();
   }
 
-  const getWordsCount = str => {
+  const getWordsPerMinute = (numOfWords, seconds) => {
+    const multiplier = 60 / seconds;
+    return Math.floor(numOfWords * multiplier);
+  }
+
+  const getWordCount = str => {
     const wordsArray = str.split(" ");
     return wordsArray.filter(item => item !== "").length;
   }
 
   const endGame = () => {
     setIsGameRunning(false);
-    setWordCount(getWordsCount(textInput));
+    setWordCount(getWordCount(textInput));
   }
 
   useEffect(() => {
@@ -46,11 +53,26 @@ function App() {
     }
   }, [secondsLeft, isGameRunning]);
 
+  useEffect(() => {
+    if (wordCount === 0) {
+      return;
+    } 
+    const wordsPerMin = getWordsPerMinute(wordCount, startingTime);
+    if (bestScore < wordsPerMin) {
+      setBestScore(wordsPerMin)
+      localStorage.setItem("bestScore", wordsPerMin);
+    } 
+  }, [wordCount])
+
   const handleEditStartingTime = (seconds) => {
     setStartingTime(seconds);
   }
 
-  useEffect(() => setSecondsLeft(startingTime), [startingTime])
+  const handleReset = () => {
+    setSecondsLeft(startingTime);
+    setWordCount(0);
+    setTextInput("");
+  }
 
   return (
       <div>
@@ -67,15 +89,27 @@ function App() {
             disabled={!isGameRunning}
             ref={textareaRef}
           />
-          <button 
-            className="button--start"
-            onClick={startGame} 
-            disabled={isGameRunning}
-          >
-            Start
-          </button>
-          <h2>Word count: {wordCount}</h2>
+          <div className="start-reset-container">
+            <button 
+              className="button--start"
+              onClick={startGame} 
+              disabled={isGameRunning}
+            >
+              Start
+            </button>
+            <button 
+              className="button--reset"
+              onClick={handleReset}
+              disabled={isGameRunning}
+              >
+                <HiRefresh />
+            </button>
+          </div>
           <h2>Seconds remaining: {secondsLeft}</h2>
+          <h2 className="message--words">Words typed: {wordCount}</h2>
+          <h3 className="message--words">Words per minute: {getWordsPerMinute(wordCount, startingTime)}</h3>
+          {bestScore && <h3 className="message--words--best-score">^^^ Best score: {bestScore} w/min ^^^</h3>}
+          
       </div>
   );
 }
