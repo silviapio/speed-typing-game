@@ -30,6 +30,9 @@ function App() {
   }
 
   const getValidWordCount = async str => {
+    if (textInput === "") {
+      return 0;
+    }
     const wordsArray = str.split(" ");
     const validWordsCount = [];
     for (const word of wordsArray) {
