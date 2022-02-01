@@ -23,7 +23,7 @@ The user can then reset the screen with the reset button, or simply start anothe
 
 ### API calls
 
-The API used to check validity of words is [Free Dictionary API](https://dictionaryapi.dev/). The API returns a lot of information but the program only needs to know if the word exists in the dictionary so it only checks if status is "ok".
+The API used to check validity of words is [Free Dictionary API](https://dictionaryapi.dev/). The API returns a lot of information but the program only needs to know if the word exists in the dictionary so it only checks if response status is "ok". In fact, when the word is not found, the API returns a 404.
 
 
 ## Known bugs
@@ -46,7 +46,7 @@ The color palette for this app is [Milky Green](https://colorhub.vercel.app/sele
 The app uses [Free Dictionary API](https://dictionaryapi.dev/) for words checking.
 
 ### Icons
-The app uses [HeroIcons through React](https://react-icons.github.io/react-icons/icons?name=hi)
+The app uses [HeroIcons through React Icons](https://react-icons.github.io/react-icons/icons?name=hi)
 
 ## Technology
 
