@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from "react";
-import {HiPencil, HiXCircle, HiCheckCircle} from "react-icons/hi";
+import {HiPencil, HiX, HiOutlineCheck} from "react-icons/hi";
 
 function StartingTimeBox(props) {
     const [isInactive, setIsInactive] = useState(true);
@@ -24,7 +24,7 @@ function StartingTimeBox(props) {
             }, 700);
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         if (!isSubmittedTimeOk()) {
             handleWrongInput();
             return;
@@ -37,7 +37,7 @@ function StartingTimeBox(props) {
         if (props.changesForbidden) {
             return;
         }
-        setIsInactive(prevState => !prevState);
+        setIsInactive(false);
     }
 
     useEffect(() => {
@@ -55,12 +55,13 @@ function StartingTimeBox(props) {
                 <input 
                     className="seconds-allowed__input" 
                     type="number" 
+                    autoFocus
                     ref={inputRef}
                     value={editedStartingTime} 
                     onChange={handleEditStartingTime} 
                     onSubmit={handleSubmit}
                 />
-                <button className="seconds-allowed__button button--submit" onClick={handleSubmit}><HiCheckCircle /></button>
+                <button className="seconds-allowed__button button--submit" onClick={handleSubmit}><HiOutlineCheck /></button>
                 </>
             }
             <button 
@@ -70,7 +71,7 @@ function StartingTimeBox(props) {
             >
                 {isInactive ?
                     <HiPencil /> :
-                    <HiXCircle />
+                    <HiX />
                 }
             </button>
         </>
