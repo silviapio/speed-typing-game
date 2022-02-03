@@ -6,11 +6,13 @@ import './App.css';
 function App() {
   const textareaRef = useRef(null);
   const [startingTime, setStartingTime] = useState(5);
+  const [currentTimer, setCurrentTimer] = useState("");
   const [isGameRunning, setIsGameRunning] = useState(false);
   const [textInput, setTextInput] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(startingTime);
   const [bestScore, setBestScore] = useState( JSON.parse(localStorage.getItem("bestScore")) || "" );
+  const [gameStopped, setGameStopped] = useState(false);
 
   const handleInput = event => {
     setTextInput(event.target.value);
@@ -56,10 +58,12 @@ function App() {
       timer = setTimeout(() => {
         setSecondsLeft(prevCount => prevCount - 1)
       }, 1000)
+      setCurrentTimer(timer);
     } else if (secondsLeft === 0) {
       endGame();
       return function() {
-        clearTimeout(timer);
+        clearTimeout(currentTimer);
+        setCurrentTimer("");
       }
     }
   }, [secondsLeft, isGameRunning]);
@@ -80,9 +84,17 @@ function App() {
   }
 
   const handleReset = () => {
-    setSecondsLeft(startingTime);
-    setWordCount(0);
-    setTextInput("");
+    if (isGameRunning) {
+      clearTimeout(currentTimer);
+      setGameStopped(true);
+      setCurrentTimer("");
+      setIsGameRunning(false);
+    } else {
+      setSecondsLeft(startingTime);
+      setGameStopped(false);
+      setWordCount(0);
+      setTextInput("");
+    }    
   }
 
   return (
@@ -90,7 +102,7 @@ function App() {
           <h1>How fast do you type?</h1>
           <div className="seconds-allowed-container">
             <p>Seconds allowed: </p>
-            <StartingTimeBox startingTime={startingTime} handleSubmitTime={handleEditStartingTime} changesForbidden={isGameRunning}/>
+            <StartingTimeBox startingTime={startingTime} handleSubmitTime={handleEditStartingTime} changesForbidden={isGameRunning || gameStopped}/>
           </div>
            
                 
@@ -111,14 +123,18 @@ function App() {
             <button 
               className="button--reset"
               onClick={handleReset}
-              disabled={isGameRunning}
               >
                 <HiRefresh />
             </button>
           </div>
           <h2>Seconds remaining: {secondsLeft}</h2>
-          <h2 className="message--words">Valid words typed: {wordCount}</h2>
-          <h3 className="message--words">Words per minute: {getWordsPerMinute(wordCount, startingTime)}</h3>
+          {gameStopped ? 
+            <h3 className="message--game-stopped">Sorry, we don't count words when game is stopped!</h3> :
+            <>
+              <h2 className="message--words">Valid words typed: {wordCount}</h2>
+              <h3 className="message--words">Words per minute: {getWordsPerMinute(wordCount, startingTime)}</h3>
+            </>
+          }          
           {bestScore && <h3 className="message--words--best-score">^^^ Best score: {bestScore} w/min ^^^</h3>}
           
       </div>

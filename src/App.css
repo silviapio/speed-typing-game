@@ -117,6 +117,10 @@ textarea:disabled {
   color: red;
 }
 
+.message--game-stopped {
+  color: var(--white);
+}
+
 .message--words {
   color: var(--grey);
 }
