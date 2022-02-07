@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from "react";
 import StartingTimeBox from "./components/StartingTimeBox";
-import {HiRefresh} from "react-icons/hi";
+import {HiRefresh, HiStop} from "react-icons/hi";
 import './App.css';
 
 function App() {
@@ -81,6 +81,7 @@ function App() {
 
   const handleEditStartingTime = (seconds) => {
     setStartingTime(seconds);
+    setSecondsLeft(seconds);
   }
 
   const handleReset = () => {
@@ -124,7 +125,7 @@ function App() {
               className="button--reset"
               onClick={handleReset}
               >
-                <HiRefresh />
+                {isGameRunning ?  <HiStop /> : <HiRefresh />}
             </button>
           </div>
           <h2>Seconds remaining: {secondsLeft}</h2>
