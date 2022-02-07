@@ -37,7 +37,8 @@ function StartingTimeBox(props) {
         if (props.changesForbidden) {
             return;
         }
-        setIsInactive(false);
+        setIsInactive(prevState => !prevState);
+        //setIsInactive(false);
     }
 
     useEffect(() => {
