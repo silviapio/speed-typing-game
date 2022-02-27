@@ -1,70 +1,38 @@
-.start-reset-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.button--start {
-  font-family: 'Ubuntu Mono', monospace;
-  font-size: 1.2rem;
-  display: block;
-  margin: 20px;
-  border: none;
-  border-radius: 2px;
-  background: var(--green);
-  padding: 10px 20px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.button--start:disabled{
-  background-color: var(--grey);
-  cursor: not-allowed;
-}
-
-.button--reset {
-  background-color: transparent;
-  color: var(--green);
-  padding: 5px;
-  border: solid var(--green) 1px;
-  border-radius: 2px;
-  font-size: 1.4rem;
-  height: 2.3rem;
-  cursor: pointer;
-}
-
-.button--reset:disabled {
-  color: var(--grey);
-  border: var(--grey);
-  border-radius: 2px;
-  cursor: not-allowed;
-}
-
 h1 {
   font-size: 1.5rem;
-  text-align:center;
+  text-align: center;
 }
 
 h2 {
   font-size: 1.4rem;
 }
 
-textarea {
-  font-family: 'Ubuntu Mono', monospace;
-  font-size: 1.2rem;
-  width: 90%;
-  max-width: 700px;
-  margin: 0 auto;
-  outline: none;
-  border-radius: 2px;
-  height: 200px;
-  background-color: var(--white);
-  padding: 10px;
+.seconds-allowed-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
-textarea:disabled {
-  background-color: var(--grey);
+.seconds-allowed-container > * {
+  font-size: 1.4rem;
+  margin: 5px 2.5px;
+}
+
+.seconds-allowed__input {
+  max-width: 3.5rem;
+  height: 1.7rem;
+  padding: 0;
+  font-size: 1.3rem;
+  font-family: "Ubuntu Mono", monospace;
+  background-color: var(--white);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+}
+
+.seconds-allowed__input--wrong {
+  color: red;
 }
 
 .seconds-allowed__button {
@@ -84,37 +52,62 @@ textarea:disabled {
   cursor: not-allowed;
 }
 
+textarea {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 1.2rem;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  outline: none;
+  border-radius: 2px;
+  height: 200px;
+  background-color: var(--white);
+  padding: 10px;
+}
+
+textarea:disabled {
+  background-color: var(--grey);
+}
+
+.start-reset-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.button--start {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 1.2rem;
+  display: block;
+  margin: 20px;
+  border: none;
+  border-radius: 2px;
+  background: var(--green);
+  padding: 10px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button--start:disabled {
+  background-color: var(--grey);
+  cursor: not-allowed;
+}
+
+.button--reset {
+  background-color: transparent;
+  color: var(--green);
+  padding: 5px;
+  border: solid var(--green) 1px;
+  border-radius: 2px;
+  font-size: 1.4rem;
+  height: 2.3rem;
+  cursor: pointer;
+}
+
 .starting-time-box {
   margin: 0 5px;
   color: var(--white);
-}
-
-.seconds-allowed-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.seconds-allowed-container > * {
-  font-size: 1.4rem;
-  margin: 5px 2.5px;
-}
-
-.seconds-allowed__input {
-  max-width: 3.5rem;
-  height: 1.7rem; 
-  padding: 0;
-  font-size: 1.3rem;
-  font-family: 'Ubuntu Mono', monospace;
-  background-color: var(--white);
-  border: none;
-  border-radius: 2px;
-  outline: none;
-}
-
-.seconds-allowed__input--wrong {
-  color: red;
 }
 
 .message--game-stopped {
