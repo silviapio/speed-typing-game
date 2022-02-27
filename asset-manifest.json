@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/speed-typing-game/static/css/main.d620805d.css",
+    "main.js": "/speed-typing-game/static/js/main.da27f447.js",
+    "static/js/787.9b0e5435.chunk.js": "/speed-typing-game/static/js/787.9b0e5435.chunk.js",
+    "index.html": "/speed-typing-game/index.html",
+    "main.d620805d.css.map": "/speed-typing-game/static/css/main.d620805d.css.map",
+    "main.da27f447.js.map": "/speed-typing-game/static/js/main.da27f447.js.map",
+    "787.9b0e5435.chunk.js.map": "/speed-typing-game/static/js/787.9b0e5435.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d620805d.css",
+    "static/js/main.da27f447.js"
+  ]
+}
