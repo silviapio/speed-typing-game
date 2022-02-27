@@ -1,7 +1,7 @@
 # Welcome to my Speed Typing Game ⚡
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-[![License: MIT](https://img.shields.io/badge/License-CC0-brightgreen.svg)]
+![License: MIT](https://img.shields.io/badge/License-CC0-brightgreen.svg)
 
 > Simple speed typing game built with React.js
 
@@ -9,7 +9,7 @@ When the user clicks start, they can type in as many words as they can; at the e
 
 ## Current version of the app is deployed at [https://silviapio.github.io/speed-typing-game/](https://silviapio.github.io/speed-typing-game/) ✨
 
-> Important note: this app is still work in progress! Jump directly to my [to-do and improvement list](#To-do and improvement list) to know what's missing.
+> Important note: this app is still work in progress! Jump directly to my [to-do list](#to-do-list) to know what's missing.
 
 ## Description and user walkthrough 📍
 
@@ -41,15 +41,26 @@ The user can then reset the screen with the reset button, or simply start anothe
 
 The API used to check validity of words is [Free Dictionary API](https://dictionaryapi.dev/). The API returns a lot of information but the program only needs to know if the word exists in the dictionary so it only checks if response status is "ok". In fact, when the word is not found, the API returns a 404.
 
-## To-do and improvement list 📔
+## Technology 👩‍💻
 
-### To-dos
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Here you will find all available scripts.
+
+To run the app in development mode, you can run from project directory:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## To-do list 
+
+### To-dos and improvements 📔
 
 - **Accessibility**: make the app fully accessible. Currently basic elements are accessible, but there is some logic changing icons on the buttons that needs improvements.
 - **Code readability**: code works, but for sure the App component needs some refactoring (and maybe buttons could be separate as unit components)
 - **API calls**: it'd good to check for the API working on application loading and only display the words count if the API is responding correctly
 
-### Known bugs
+### Known bugs 🐛
 
 - Some non existing words are validated as existing: this is due to the API used, as it returns some 3-letter words like "xxx" or "aaa" as valid, identifying them as acronyms. However, this won't be fixed for the time being, as the issue is minor and fixing it implies changing the API, possibly adding complexity within the API call which is outside the scope of this app.
 - Sometimes the API causes a CORS error.
@@ -82,16 +93,4 @@ The app uses [Free Dictionary API](https://dictionaryapi.dev/) for words checkin
 
 The app uses [HeroIcons through React Icons](https://react-icons.github.io/react-icons/icons?name=hi)
 
-## Technology
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Here you will find all available scripts.
-
-To run the app in development mode, you can run from project directory:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
